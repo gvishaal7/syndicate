@@ -53,7 +53,8 @@ public class addToDB extends HttpServlet {
     				String eventAddress = request.getParameter("event_address");
     				float fare = Float.parseFloat(request.getParameter("event_fare"));
     				String contactPerson = request.getParameter("contact_person");
-    				long contactNumber = Long.parseLong(request.getParameter("contact_number"));    		
+    				long contactNumber = Long.parseLong(request.getParameter("contact_number"));
+				/* insert statement for the query. delibratly id is ignored as it is set as auto_increment */
     				String sqlUpdateQuery = "INSERT INTO events (event_name, event_start_date, event_end_date, address, fare, contact_person, contact_number) VALUES ('"+eventName+"',"+startDateMilli+","+endDateMilli+",'"+eventAddress+"',"+fare+",'"+contactPerson+"',"+contactNumber+")";
     				insertStatement = con.createStatement();
     				insertStatement.executeUpdate(sqlUpdateQuery); //adds the new tuple to the table
