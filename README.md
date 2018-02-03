@@ -13,7 +13,6 @@ Since MySql server does not support OVER() function, the "id" column acts as a R
 log in credentials:
 
 id: admin
-
 password: password
 
 Asumption:
