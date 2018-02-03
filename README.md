@@ -28,6 +28,6 @@ the cron job file checks calls the cast.js file every 1 hr
 Initially the "count.txt" file countains a count value of 0 and is updated everytime when the servlet returns new data.
 This helps in tracking if some new data was added by the admin between every periodic check.
 
-The lookedup website's api end points are hard coded to "cast.js" and using this data, the newly added data is sent to these websites.
+The lookedup website's api end points are hard coded (must be added) to "cast.js" and using this data, the newly added data is sent to these websites.
 
 note: make sure node.js is installed before running cast.js
