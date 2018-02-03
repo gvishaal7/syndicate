@@ -1,27 +1,27 @@
 var fs = require("fs");
-var counts = parseInt(fs.readFileSync("count.txt").toString());
+var counts = parseInt(fs.readFileSync("count.txt").toString()); //reads the last count that was updated from the count file.
 var request = require("request");
 request ({
-	uri:"http://localhost:8541/syndicate/updateWebsites",
+	uri:"http://localhost:8541/syndicate/updateWebsites", //sends a request to the updateWebsites servlet with the last count
 	method: "POST",
 	form: {
 		count: counts
 	}
 }, function(error, response, body) {
 	var output = JSON.parse(body);
-	console.log(output);
 	var keys = Object.keys(output);
-	if(keys.length > 0) {
+	/*
+	if the servlet responds with a non-empty string, then the count is updated and the new data is send to the 5 
+	looked up websites.
+	*/
+	if(keys.length > 0) { 
 		var newCount = keys[keys.length-1];
 		setCount(newCount);
-		
+		castIt(output);	
 	}
-	/*
-	else {
-		console.log("hello");
-	}*/
 });
 
+// function to update the new count value
 function setCount(count) {
 	fs.writeFile("count.txt",count,function(err) {
 		if(err) {
