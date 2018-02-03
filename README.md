@@ -23,7 +23,9 @@ my cron file would look like the following:
 "59 * * * * node /dir/cast.js"
 the cron job file checks calls the cast.js file every 1 hr
 
+"compile.sh" file inside the "src" directory provides the insight on how the java classes were compiled.
+
 Initially the "count.txt" file countains a count value of 0 and is updated everytime when the servlet returns new data.
 This helps in tracking if some new data was added by the admin between every periodic check.
 
-"compile.sh" file inside the "src" directory provides the insight on how the java classes were compiled.
+The lookedup website's api end points are hard coded to "cast.js" and using this data, the newly added data is sent to these websites.
