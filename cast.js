@@ -34,9 +34,15 @@ function setCount(count) {
 //function to send the data to the 5 lookedup websites
 function castIt(output) {
 	var urls = {}; //a string array to store api ends of the looked up websites.
+	var methods = {}; //a string array to store the type of send methods for each of the api in the previous array
 	for(var i=0;i<urls.length;i++) {
-		app.get(urls[i], function(req, res, next) {
-			res.send(output); //sends the json value to the given website.
+		request ({
+			uri : urls[i],
+			method: methds[i],
+			form : {
+				//data in the desired format
+			}
+		}, function(error, response, body) {
 		});
 	}
 }
