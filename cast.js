@@ -30,3 +30,13 @@ function setCount(count) {
     	console.log("Count updated");
 	});
 }
+
+//function to send the data to the 5 lookedup websites
+function castIt(output) {
+	var urls = {}; //a string array to store api ends of the looked up websites.
+	for(var i=0;i<urls.length;i++) {
+		app.get(urls[i], function(req, res, next) {
+			res.send(output); //sends the json value to the given website.
+		});
+	}
+}
