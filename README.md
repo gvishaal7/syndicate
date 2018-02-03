@@ -31,3 +31,5 @@ This helps in tracking if some new data was added by the admin between every per
 The lookedup website's api end points are hard coded (must be added) to "cast.js" and using this data, the newly added data is sent to these websites.
 
 note: make sure node.js is installed before running cast.js
+
+AWS Link : http://syndicateapp-env.us-east-2.elasticbeanstalk.com/
