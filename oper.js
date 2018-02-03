@@ -1,9 +1,10 @@
+/* function to invoke the calender window for inputing start and end dates */
 $(function() {
 	$(".date_pick").datepicker();
 });
 
+/* log in form submit event */
 $(document).on("click","#log_in_button", function(event) {
-	//alert("hello");
 	var user = document.getElementById("log_in_id").value;
 	if(user == null || user == "") {
 		alert("enter a user name");
@@ -28,40 +29,45 @@ $(document).on("click","#log_in_button", function(event) {
 	event.preventDefault();
 });
 
+/* returns back to the log in page */
 $(document).on("click", "#log_off_button", function(event) {
 	document.getElementById("log_in_div").style.display = 'block';
 	document.getElementById("add_to_db_div").style.display = 'none';
 	event.preventDefault();
 });
 
+/* clears all the inputed values */
 $(document).on("click","#event_clear_button", function(event) {
 	clear_values("event_info");
 	event.preventDefault();
 });
 
+/* event addition form submit */
 $(document).on("click","#event_submit_button", function(event) {
 	var event_info_details = document.getElementsByName("event_info");
 	var event_info = [];
 	for(var i=0;i<event_info_details.length;i++) {
 		event_info[i] = event_info_details[i].value;
 	}
-	//console.log(event_info_details);
 	if(checkStatus()) {
-		//alert("no errors");
 		add_to_db(event_info);
 		clear_values("event_info");
 	}
 	else {
-		//alert("errors");
 		$("#output").empty();
 		$("#output").append("Fix the errors");
 	}
 	event.preventDefault();
 });
 
+/*
+	validates the entered fare
+	checks if the entered fare is positive
+	is a proper decimal number with only numeric characters
+*/
 $(document).on("change","#event_fare", function(event) {
 	var fare_value = document.getElementById("event_fare").value;
-	if(fare_value.match(/^[-]\d+\.\d+$/) || fare_value.match(/^[-]\d+$/)) {
+	if(fare_value.match(/^[-]\d+\.\d+$/) || fare_value.match(/^[-]\d+$/)) { 
 		$("#event_fare_error").empty();
 		$("#event_fare_error").append("Enter positive numbers");
 	}
@@ -75,6 +81,10 @@ $(document).on("change","#event_fare", function(event) {
 	event.preventDefault();
 });
 
+/*
+	validates the contact person's name
+	checks if the entered value contains only alphabets
+*/
 $(document).on("change","#event_person",function(event) {
 	var name = document.getElementById("event_person").value;
 	if(!name.match(/^[a-z]+$/i)) {
@@ -87,6 +97,10 @@ $(document).on("change","#event_person",function(event) {
 	event.preventDefault();
 });
 
+/*
+	validates the contact phone number
+	checks if the entered value contains only numeric values
+*/
 $(document).on("change","#event_phone_number",function(event) {
 	var number = document.getElementById("event_phone_number").value;
 	if(!number.match(/^\d+$/)) {
@@ -99,6 +113,12 @@ $(document).on("change","#event_phone_number",function(event) {
 	event.preventDefault();
 });
 
+/*
+	validates the start date
+	checks if the entered value is,
+		1) greater than the current date (today's date)
+		2) is less than the end date (if entered before)
+*/
 $(document).on("change","#event_start_date",function(event) {
 	var start_date = document.getElementById("event_start_date").value;
 	start_date = Date.parse(start_date);
@@ -120,6 +140,11 @@ $(document).on("change","#event_start_date",function(event) {
 	}
 });
 
+/*
+	validates the end date
+	checks if the entered value is less than the start date and
+	if a valid date has been entered for the start date
+*/
 $(document).on("change","#event_end_date", function(event) {
 	var end_date = document.getElementById("event_end_date").value;
 	var start_date = document.getElementById("event_start_date").value;
@@ -137,7 +162,9 @@ $(document).on("change","#event_end_date", function(event) {
 	}
 });
 
-
+/*
+	function to clear all the entered values based on the name attribute of the elements
+*/
 function clear_values(val) {
 	var elements = document.getElementsByName(val);
 	for(var i=0;i<elements.length;i++) {		
@@ -149,15 +176,20 @@ function clear_values(val) {
 	$("#output").empty();
 }
 
+/*
+	function that sends data to the servlet
+*/
 function add_to_db(event_info) {
-	//console.log("eventInfo : "+event_info);
 	$.post("addToDB", {event_name : event_info[0], event_start_date : event_info[1], event_end_date : event_info[2], event_address : event_info[3], event_fare : event_info[4], contact_person : event_info[5], contact_number : event_info[6] }, function(status){
-		//var status = responseJson["status"];
 		$("#output").empty();
 		$("#output").append(status);
 	});
 }
 
+/*
+	function that checks if all the errors occurred while adding an event has been rectified.
+	this function is called before sending data to the servlet.
+*/
 function checkStatus() {
 	console.log($(".error_message").text());
 	if($(".error_message").text().length > 0) {
