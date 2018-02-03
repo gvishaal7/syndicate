@@ -11,8 +11,8 @@ import javax.servlet.http.*;
 public class addToDB extends HttpServlet {
 
 	private static final String dbDriver = "com.mysql.jdbc.Driver";
-    private static final String dbUName = "root";
-    private static final String dbPass = "password";
+    private static final String dbUName = ""; //DB sql username
+    private static final String dbPass = ""; //DB sql password
     private static final String dbUrl = ""; //DB connection URL
 
     //event_name,event_start_date,event_end_date, address, fare, contact_person, contact_number
