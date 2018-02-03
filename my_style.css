@@ -1,0 +1,22 @@
+.error_message {
+	color : red;
+}
+
+.body_div {
+	position: absolute;
+	top:10%;
+	left:40%;
+}
+
+.submit_button, .clear_button, #log_off_button {
+	background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 2.5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
