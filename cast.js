@@ -43,6 +43,7 @@ function castIt(output) {
 				//data in the desired format
 			}
 		}, function(error, response, body) {
+			console.log(body);
 		});
 	}
 }
