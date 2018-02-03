@@ -6,17 +6,17 @@ import java.sql.*;
 import java.text.*;
 import javax.servlet.*;
 import javax.servlet.http.*;
-//import com.google.gson.*;
 
 public class addToDB extends HttpServlet {
 
-	private String dbDriver = "com.mysql.jdbc.Driver";
-    private String dbName = System.getProperty("RDS_DB_NAME");
-  	private String userName = System.getProperty("RDS_USERNAME");
-  	private String password = System.getProperty("RDS_PASSWORD");
-  	private String hostname = System.getProperty("RDS_HOSTNAME");
-  	private String port = System.getProperty("RDS_PORT");
-  	private String jdbcUrl = "jdbc:mysql://" + hostname + ":" +port + "/" + dbName + "?user=" + userName + "&password=" + password;
+	private String dbDriver = "com.mysql.jdbc.Driver"; //mysql driver string
+	private String dbName = System.getProperty("RDS_DB_NAME"); //the database name = ebdb
+  	private String userName = System.getProperty("RDS_USERNAME"); // user name for mysql server = user
+  	private String password = System.getProperty("RDS_PASSWORD"); // password for mysql server = password
+  	private String hostname = System.getProperty("RDS_HOSTNAME"); // aws rds host string
+  	private String port = System.getProperty("RDS_PORT"); //port to which the mysql server is connected
+	/* the connection string */
+  	private String jdbcUrl = "jdbc:mysql://" + hostname + ":" +port + "/" + dbName + "?user=" + userName + "&password=" + password; 
   
 
     //event_name,event_start_date,event_end_date, address, fare, contact_person, contact_number
@@ -24,19 +24,17 @@ public class addToDB extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	Connection con = null;
     	PrintWriter out = null;
-    	System.out.println("uid : "+userName);
-    	System.out.println("pass : "+password);
-    	System.out.println("host : "+hostname);
-    	System.out.println("DBName : "+dbName);
     	try {
     		Class.forName(dbDriver);
     		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     		con = DriverManager.getConnection(jdbcUrl);
+		//calls the function which checks if the given table exists or not
     		createTable(con,"events");
-    		String eventName = request.getParameter("event_name").toLowerCase();
-    		String eventStartDate = request.getParameter("event_start_date");
-    		java.util.Date startDate = sdf.parse(eventStartDate);
-    		long startDateMilli = startDate.getTime(); 
+    		String eventName = request.getParameter("event_name").toLowerCase(); //the event names are set to lowercase
+    		String eventStartDate = request.getParameter("event_start_date"); 
+    		java.util.Date startDate = sdf.parse(eventStartDate); 
+    		long startDateMilli = startDate.getTime(); //converts the given event start date to milliseconds
+		/* checks if the given event doesn't overlap itself */
     		String checkSQLString = "select event_name from events where event_name='"+eventName+"' and event_end_date >="+startDateMilli;
     		String status = "";
     		Statement queryStatement = null;
@@ -45,20 +43,20 @@ public class addToDB extends HttpServlet {
     		try {
     			queryStatement = con.createStatement();
     			sqlResponse = queryStatement.executeQuery(checkSQLString);
-    			if(sqlResponse.next()) {
+    			if(sqlResponse.next()) { //condition to check if the event overlap itself
     				status = "Event already exists";
     			}
     			else {
     				String eventEndDate = request.getParameter("event_end_date");
     				java.util.Date endDate = sdf.parse(eventEndDate);
-    				long endDateMilli = endDate.getTime();
+    				long endDateMilli = endDate.getTime(); //converts the given event end date to milliseconds
     				String eventAddress = request.getParameter("event_address");
     				float fare = Float.parseFloat(request.getParameter("event_fare"));
     				String contactPerson = request.getParameter("contact_person");
     				long contactNumber = Long.parseLong(request.getParameter("contact_number"));    		
     				String sqlUpdateQuery = "INSERT INTO events (event_name, event_start_date, event_end_date, address, fare, contact_person, contact_number) VALUES ('"+eventName+"',"+startDateMilli+","+endDateMilli+",'"+eventAddress+"',"+fare+",'"+contactPerson+"',"+contactNumber+")";
     				insertStatement = con.createStatement();
-    				insertStatement.executeUpdate(sqlUpdateQuery);
+    				insertStatement.executeUpdate(sqlUpdateQuery); //adds the new tuple to the table
     				status = "New event has been added";
     			}
     			queryStatement.close();
@@ -86,10 +84,10 @@ public class addToDB extends HttpServlet {
     				e.printStackTrace();
     			}
     		}
-    		response.setContentType("text/html");
+    		response.setContentType("text/html"); //sets the response type as string
     		response.setCharacterEncoding("UTF-8");
     		out = response.getWriter();
-    		out.write(status);
+    		out.write(status); //writes the response to the calling function
     		out.close();
     		con.close();
     	} catch(ClassNotFoundException cnfe) {
@@ -116,24 +114,29 @@ public class addToDB extends HttpServlet {
     	doPost(request,response);
     }
 
-
+    /*
+    	function which checks if the table we are going to access exists in the database
+	if it doesn't exist, it creates a new table with the schema mentioned in the readme file.
+    */
     public void createTable(Connection con, String table) {
     	Statement checkStatement = null;
     	ResultSet checkSet = null;
     	try {
     		checkStatement = con.createStatement();
     		String checkString = "SELECT * FROM "+table;
+		/* if the table doesn't exist, checkStatement will throw an exception */
     		checkSet = checkStatement.executeQuery(checkString);
     		checkSet.close();
     		checkStatement.close();
-    	} catch(Exception e) {
+    	} catch(Exception e) { //the thrown exception is caught here
     		String message = e.getMessage();
     		if(message.contains("Table") && message.contains("doesn't exist")) {
+			/* table schema as mentioned in the readme file */
     			String createStatementString = "create table events(id BIGINT NOT NULL AUTO_INCREMENT, event_name varchar(255) NOT NULL, event_start_date BIGINT NOT NULL, event_end_date BIGINT NOT NULL, Address varchar(255) NOT NULL, fare decimal(7,2), contact_person varchar(255), contact_number BIGINT, PRIMARY KEY(id))";
     			Statement createStatement = null;
     			try {
     				createStatement = con.createStatement();
-    				createStatement.executeUpdate(createStatementString);
+    				createStatement.executeUpdate(createStatementString); //creates the table.
     				createStatement.close();
     			} catch(Exception e1) {
     				e1.printStackTrace();
