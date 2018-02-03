@@ -22,3 +22,5 @@ my cron file would look like the following:
 
 Initially the "count.txt" file countains a count value of 0 and is updated everytime when the servlet returns new data.
 This helps in tracking if some new data was added by the admin for every periodic check.
+
+"compile.sh" file inside the "src" directory provides the insight on how the java classes were compiled.
