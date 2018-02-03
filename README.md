@@ -6,12 +6,17 @@ Server: Apache Tomcat 8
 
 ![DB Schema](https://i.imgur.com/6roCTS3.png "DB Schema")
 
-Since MySql server does not support OVER() function, the id column acts as a ROW_NUMBER of the analytical function.
+Since MySql server does not support OVER() function, the "id" column acts as a ROW_NUMBER of the analytical function.
 
-The log in id is admin and the password is password.
+log in credentials:
+id: admin
+password: password
 
 Asumption:
-1) An event can occur more than once only if its current start date and previous end date doesnt overlap.
+An event can occur more than once only if its current start date and previous end date doesnt overlap.
 
 my cron file would look like the following:
 "* 1 * * * node /dir/cast.js"
+
+Initially the "count.txt" file countains a count value of 0 and is updated everytime when the servlet returns new data.
+This helps in tracking if some new data was added by the admin for every periodic check.
