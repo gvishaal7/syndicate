@@ -16,7 +16,7 @@ An event can occur more than once only if its current start date and previous en
 
 my cron file would look like the following:
 
-"59 * * * * node /'<directory>'/cast.js"
+"59 * * * * node /'directory'/cast.js"
   
 the cron job file checks calls the cast.js file every 1 hr.
 
