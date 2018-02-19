@@ -28,11 +28,10 @@ public class displayEvents extends HttpServlet{
   	private String password = System.getProperty("RDS_PASSWORD"); // password for mysql server
   	private String hostname = System.getProperty("RDS_HOSTNAME"); // aws rds host string
   	private String port = System.getProperty("RDS_PORT"); //port to which the mysql server is connected
-    /* the connection string */
+    	/* the connection string */
   	private String jdbcUrl = "jdbc:mysql://" + hostname + ":" +port + "/" + dbName + "?user=" + userName + "&password=" + password;
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
-		//displaySQLCred();
 		PrintWriter out = null;
 		try {
 			int flag = Integer.parseInt(request.getParameter("flag"));
@@ -61,15 +60,10 @@ public class displayEvents extends HttpServlet{
 
 	public String getEvents(int flag) {
 		String output = "";
-		Connection con = null;
-		/* for local 
-		userName = "root";
-        password = "password";
-        jdbcUrl = "jdbc:mysql://localhost:3306/syndicate"; */
+		Connection con = null;	
 		try {
 			Class.forName(dbDriver);
-			//con = DriverManager.getConnection(jdbcUrl,userName,password); //for local
-            con = DriverManager.getConnection(jdbcUrl); //for AWS
+            con = DriverManager.getConnection(jdbcUrl);
             addToDB atd = new addToDB();
             atd.createTable(con,"events");
             long currentTime = new Date().getTime();
@@ -140,14 +134,6 @@ public class displayEvents extends HttpServlet{
 			}
 		}
 		return output;
-	}
-
-	public void displaySQLCred() {
-		System.out.println("DB Name : "+dbName);
-		System.out.println("DB Username : "+userName);
-		System.out.println("DB Password : "+password);
-		System.out.println("DB Host : "+hostname);
-		System.out.println("DB Port : "+port);
 	}
 }
 
