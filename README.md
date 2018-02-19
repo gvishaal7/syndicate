@@ -1,7 +1,9 @@
 Syndicate
 
 Backend : MySql server
+
 Frontend : HTML, java script, CSS
+
 Server: Apache Tomcat 8
 
 DB Schema: 
