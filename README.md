@@ -10,7 +10,7 @@ DB Schema:
 
 ![DB Schema](https://i.imgur.com/k92KVw8.png "DB Schema")
 
-The 'time_added' column helps in keeping track of the newly added events to the table. It makes retrieving data that was added in the last 1hour.
+The 'time_added' column helps in keeping track of the newly added events to the table. It makes retrieving data that was added in the last 1 hour easier.
 
 Asumption:
 
