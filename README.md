@@ -1,10 +1,14 @@
 Syndicate
 
-[b]Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information.[/b]
+Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information.
+
+To showcase the above behaviour, two independent webapplications are developed. 'Syndication' is the application through which you can add new elements (here events) to the server. 'Hosting' is the application which has subscribed to 'syndication' and is updated whenever a new event is added. 'Hosting' is updated every 1 hour.
+
+The following technologies are used to aid syndication process,
 
 Backend : MySql server
 
-Frontend : HTML, java script, CSS
+Frontend : HTML, JavaScript, CSS
 
 Server: Apache Tomcat 8
 
