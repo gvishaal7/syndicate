@@ -12,9 +12,7 @@ DB Schema:
 
 The 'time_added' column helps in keeping track of the newly added events to the table. It makes retrieving data that was added in the last 1 hour easier.
 
-Asumption:
-
-An event can occur more than once only if its current start date and previous end date doesnt overlap.
+Asumption: An event can occur more than once only if its current start date and previous end date doesnt overlap.
 
 my cron file would look like the following:
 
