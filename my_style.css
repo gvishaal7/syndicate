@@ -1,11 +1,30 @@
+body {
+    margin:0px;
+    padding:0px;
+}
+
+.body_div {
+   margin: 0px 10% 0px 10%;
+}
+
+#loading_div {
+    text-align: center;
+}
+
 .error_message {
 	color : red;
 }
 
-.body_div {
-	position: absolute;
-	top:10%;
-	left:40%;
+#log_in_div{
+	margin: 10% 0px 0px 40%;
+    width: 50%;
+}
+
+#new_event_table {
+    border:2px solid grey;
+    width: auto;
+    box-shadow: 5px 5px #888888;
+    padding:10px;
 }
 
 .submit_button, .clear_button, #log_off_button {
@@ -17,6 +36,88 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    /*margin: 4px 2px;*/
     cursor: pointer;
+}
+
+#log_off {
+    position: fixed;
+    left: 90%;
+}
+
+ul li {
+    display: inline;
+}
+
+ul#admin_tabs li {
+    margin: 25px;
+    font-size: larger;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    border-color: green;
+    border-width: 0px 0px 2px 0px;
+    border-style: solid;    
+    color: grey;
+}
+
+.event_tab_pop_up {
+    display: none;
+}
+
+.event_tab { 
+    height: 15%;
+    width: 15%;
+    float: left;
+    margin:10px 10px 0px 0px;
+    border:2px solid grey;
+    padding:3px;
+    box-shadow: 5px 5px #888888;
+}
+
+.event_tab table {
+    width:100%;
+}
+
+.event_tab td {
+    max-width: 1px;
+}
+
+.event_tab:hover div {
+    display: block;
+}
+
+.event_tab_pop_up {
+    height:200px;
+    width:200px;
+    display : none;
+    position : relative;
+    background-color : cornflowerblue;
+    color: white;
+    top:0%;
+    left:25%;
+    z-index: 3;
+}
+
+.event_tab_table {
+    align-self: center;
+}
+
+.event_tab_table td {
+    text-align: center; 
+}
+
+.empty_msg {
+    font-size: 32px;
+    text-align: center;
+}
+
+#output {
+    margin: 10px 0px 0px 10px;
+    font-size: 20px;
 }
