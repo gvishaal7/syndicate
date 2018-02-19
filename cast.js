@@ -1,49 +1,47 @@
-var fs = require("fs");
-var counts = parseInt(fs.readFileSync("count.txt").toString()); //reads the last count that was updated from the count file.
-var request = require("request");
-request ({
-	uri:"http://localhost:8541/syndicate/updateWebsites", //sends a request to the updateWebsites servlet with the last count
-	method: "POST",
-	form: {
-		count: counts
-	}
-}, function(error, response, body) {
-	var output = JSON.parse(body);
-	var keys = Object.keys(output);
-	/*
-	if the servlet responds with a non-empty string, then the count is updated and the new data is send to the 5 
-	looked up websites.
-	*/
-	if(keys.length > 0) { 
-		var newCount = keys[keys.length-1];
-		setCount(newCount);
-		castIt(output);	
-	}
+var mysql = require('mysql');
+var request = require('request');
+
+var con = mysql.createConnection({
+	host : //DB host string
+	user : //DB user name
+	password : //DB password
+	database: //DB name
 });
 
-// function to update the new count value
-function setCount(count) {
-	fs.writeFile("count.txt",count,function(err) {
-		if(err) {
-        	return console.log(err);
-    	}
-    	console.log("Count updated");
-	});
-}
-
-//function to send the data to the 5 lookedup websites
-function castIt(output) {
-	var urls = {}; //a string array to store api ends of the looked up websites.
-	var methods = {}; //a string array to store the type of send methods for each of the api in the previous array
-	for(var i=0;i<urls.length;i++) {
-		request ({
-			uri : urls[i],
-			method: methds[i],
-			form : {
-				//data in the desired format
-			}
-		}, function(error, response, body) {
-			console.log(body);
-		});
+con.connect(function(err) {
+	if(err) throw err;
+	var d = new Date(); //returns the current time
+	var hr = d.getHours(); //returns the current hour in 24hr format
+	hr--; 
+	/*
+		since we need the tupels which were updated in the past 1 hr, we subtract 1 from current hour
+		since we get -1 when we substract 1 from 00hours, hr is set to 23 and the returned date is subtracted by 1
+	*/
+	if(hr < 0) {
+		hr = 23;
+		d.setDate(d.getDate()-1);
 	}
+	d.setHours(hr);
+	d = Date.parse(d);
+	/*
+		the following query returns all the tuples which added in the previous hour
+	*/
+	var query = "SELECT event_name, event_start_date, event_end_date, Address, contact_person, contact_number, fare FROM events WHERE time_added >= "+d;
+	con.query(query, function(err, result, fields) {
+		if(err) throw err;
+		var json_string = JSON.stringify(result); //the data retrieved is converted to a string
+		send_data(json_string);
+	});
+});
+
+function send_data(data) {
+	request({
+		uri: //url to which you want to send the data
+		method: "POST",
+		form: {
+			data : data 
+		}
+	},function(error, response, body){
+		console.log(error);
+	});
 }
