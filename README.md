@@ -1,5 +1,7 @@
 Syndicate
 
+[b]Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information.[/b]
+
 Backend : MySql server
 
 Frontend : HTML, java script, CSS
