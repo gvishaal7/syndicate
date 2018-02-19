@@ -6,7 +6,7 @@ Server: Apache Tomcat 8
 
 DB Schema: 
 
-![DB Schema](https://i.imgur.com/6roCTS3.png "DB Schema")
+![DB Schema](https://i.imgur.com/k92KVw8.png "DB Schema")
 
 Since MySql server does not support OVER() function, the "id" column acts as a ROW_NUMBER of the analytical function.
 
