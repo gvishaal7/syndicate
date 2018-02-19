@@ -1,6 +1,6 @@
 Syndicate
 
-Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information.
+Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information. Eg: RSS feed
 
 To showcase the above behaviour, two independent webapplications are developed. 'Syndication' is the application through which you can add new elements (here events) to the server. 'Hosting' is the application which has subscribed to 'syndication' and is updated whenever a new event is added. 'Hosting' is updated every 1 hour.
 
