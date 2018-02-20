@@ -32,16 +32,16 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>DBAdd</servlet-name>
-        <url-pattern>/addToDB</url-pattern>
+        <url-pattern>/newEntry</url-pattern>
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>updatesites</servlet-name>
-        <servlet-class>com.syndicate.updateWebsites</servlet-class>
+        <servlet-name>displayevents</servlet-name>
+        <servlet-class>com.syndicate.displayEvents</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>updatesites</servlet-name>
-        <url-pattern>/updateWebsites</url-pattern>
+        <servlet-name>displayevents</servlet-name>
+        <url-pattern>/getContent</url-pattern>
     </servlet-mapping>
 
 </web-app>
