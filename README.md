@@ -4,6 +4,12 @@ Basic syndication process: Whenever a new block of element is added to the serve
 
 To showcase the above behaviour, two independent webapplications are developed. 'Syndication' is the application through which you can add new elements (here events) to the server. 'Hosting' is the application which has subscribed to 'syndication' and is updated whenever a new event is added. 'Hosting' is updated every 1 hour.
 
+The log-in credentials for the admin is,
+
+user id: admin
+
+password: password
+
 The following technologies are used to aid syndication process,
 
 Backend : MySql server
