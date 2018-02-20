@@ -5,7 +5,6 @@ export CLASSPATH=$HOME_DIR/gson-2.6.1.jar:$HOME_DIR/servlet-api.jar:$HOME_DIR/co
 #JDK_HOME= jdk path
 
 $JDK_HOME/javac -d jar addToDB.java
-$JDK_HOME/javac -d jar updateWebsites.java
 $JDK_HOME/javac -d jar displayEvents.java
 
 #create a directory name "jar" with a sub-directory "syndicate" in "src" folder. this is where the class files will reside
