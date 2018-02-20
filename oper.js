@@ -193,7 +193,7 @@ function clear_values(val) {
 */
 function add_to_db(event_info) {
 	open_loader();
-	$.post("addToDB", {
+	$.post("newEntry", {
 		event_name : event_info[0], event_start_date : event_info[1], event_end_date : event_info[2], 
 		event_address : event_info[3], event_fare : event_info[4], contact_person : event_info[5], contact_number : event_info[6] }, 
 		function(status) {
@@ -236,7 +236,7 @@ function new_event() {
 function up_events() {
 	open_loader();
 	set_header("list_up_events");	
-	$.post("displayEvents", {flag : 1} , 
+	$.post("getContent", {flag : 1} , 
 		function(response) {
 			var to_write = set_body_content(response,1);
 			$("#up_event_div").empty();
@@ -254,7 +254,7 @@ function up_events() {
 function exp_events() {
 	open_loader();
 	set_header("list_exp_events");
-	$.post("displayEvents", {flag : 2}, 
+	$.post("getContent", {flag : 2}, 
 		function(response) {
 			var to_write = set_body_content(response,2);
 			$("#exp_event_div").empty();
