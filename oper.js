@@ -344,13 +344,11 @@ function set_body(option) {
 }
 
 function open_loader() {
-	document.getElementById("admin_operations").style.zIndex = -3;
-	document.getElementById("loading_div").style.zIndex = 4;
 	document.getElementById("loading_div").style.display = 'block';
+	document.getElementById("admin_operations").style.opactiy = '0.3';
 }
 
 function close_loader() {
-	document.getElementById("admin_operations").style.zIndex = 1;
-	document.getElementById("loading_div").style.zIndex = -3;
 	document.getElementById("loading_div").style.display = 'none';
+	document.getElementById("admin_operations").style.opactiy = '1';
 }
