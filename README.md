@@ -37,9 +37,3 @@ the cron job file calls the cast.js file every 1 hr.
 The looked-up website's api end points are hard coded (must be added) in "cast.js". The new events are cast to the looked-up websites upon retriving from the database.
 
 note: make sure node.js, 'mysql' component of node.js and 'request' component of node.js are installed before running cast.js. The Cron job will be turned off, unless required.
-
-AWS Links:
-
-Syndication application : http://syndicateapp-env.us-east-2.elasticbeanstalk.com/
-
-Hosting application : http://hosting-syndicate.us-east-2.elasticbeanstalk.com/
