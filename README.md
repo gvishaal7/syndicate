@@ -30,7 +30,7 @@ my cron file would look like the following:
 
 "* * * * * node /'directory'/cast.js"
   
-the cron job file calls the cast.js file every 1 hr.
+the cron job file calls the cast.js file every min.
 
 "compile.sh" file inside the "src" directory provides the insight on how the java classes were compiled.
 
