@@ -1,8 +1,8 @@
-Syndicate
+# Syndicate
 
 Basic syndication process: Whenever a new block of element is added to the server, all the subscribing websites must also be updated with the same information. Eg: RSS feed
 
-To showcase the above behaviour, two independent webapplications are developed. 'Syndication' is the application through which you can add new elements (here events) to the server. 'Hosting' is the application which has subscribed to 'syndication' and is updated whenever a new event is added. 'Hosting' is updated every 1 hour.
+To showcase the above behaviour, two independent webapplications are developed. 'Driver' is the application through which you can add new elements (here events) to the server. 'Hosting' is the application which has subscribed to 'syndication' and is updated whenever a new event is added. 'Hosting' is updated every minute.
 
 The log-in credentials for the admin is,
 
@@ -12,17 +12,17 @@ password: password
 
 The following technologies are used to aid syndication process,
 
-Backend : MySql server
+Backend : MySql server, node.js
 
 Frontend : HTML, JavaScript, CSS
 
 Server: Apache Tomcat 8
 
-DB Schema: 
+## DB Schema: 
 
 ![DB Schema](https://i.imgur.com/k92KVw8.png "DB Schema")
 
-The 'time_added' column helps in keeping track of the newly added events to the table. It makes retrieving data that was added in the last 1 hour easier.
+The 'time_added' column helps in keeping track of the newly added events to the table. It makes retrieving data that was added in the last min easier.
 
 Asumption: An event can occur more than once only if its current start date and previous end date doesnt overlap.
 
@@ -41,4 +41,9 @@ note: make sure node.js, 'mysql' component of node.js and 'request' component of
 The AWS webserver was brought down due to in-sufficient funds.
 
 Driver URL: http://syndicate-driver.us-east-2.elasticbeanstalk.com/
+
 Host URL: http://syndicate-hosted.us-east-2.elasticbeanstalk.com/
+
+### Note: 
+1) In the Driver application is configured as 't2.micro' aka cannot accept heavy connection requests.
+2) The start and end dates follow in UTC format. So the upcoming and expired tabs are updated accordingly.
