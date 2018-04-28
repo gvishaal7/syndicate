@@ -28,7 +28,7 @@ Asumption: An event can occur more than once only if its current start date and 
 
 my cron file would look like the following:
 
-"59 * * * * node /'directory'/cast.js"
+"* * * * * node /'directory'/cast.js"
   
 the cron job file calls the cast.js file every 1 hr.
 
@@ -39,3 +39,6 @@ The looked-up website's api end points are hard coded (must be added) in "cast.j
 note: make sure node.js, 'mysql' component of node.js and 'request' component of node.js are installed before running cast.js. The Cron job will be turned off, unless required.
 
 The AWS webserver was brought down due to in-sufficient funds.
+
+Driver URL: http://syndicate-driver.us-east-2.elasticbeanstalk.com/
+Host URL: http://syndicate-hosted.us-east-2.elasticbeanstalk.com/
