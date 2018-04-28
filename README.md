@@ -45,5 +45,4 @@ Driver URL: http://syndicate-driver.us-east-2.elasticbeanstalk.com/
 Host URL: http://syndicate-hosted.us-east-2.elasticbeanstalk.com/
 
 ### Note: 
-1) In the Driver application is configured as 't2.micro' aka cannot accept heavy connection requests.
-2) The start and end dates follow in UTC format. So the upcoming and expired tabs are updated accordingly.
+The start and end dates follow in UTC format. So the upcoming and expired tabs are updated accordingly.
